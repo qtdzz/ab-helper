@@ -8,10 +8,9 @@
     <artifactId>ab-helper-parent</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <name>AB Helper Parent</name>
     <modules>
         <module>ab-helper</module>
         <module>ab-helper-demo</module>
     </modules>
-
-
 </project>
