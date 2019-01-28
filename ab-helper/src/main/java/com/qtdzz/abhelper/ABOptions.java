@@ -1,23 +1,29 @@
 package com.qtdzz.abhelper;
 
-public class ABOptions {
-    private final ABType type;
-    private String[] ab;
+public class ABOptions<T> {
+  private final ABType type;
+  private final T[] ab;
+  private final String id;
 
-    public ABOptions(ABType type, String... ab) {
-        this.type = type;
-        this.ab = ab;
-    }
+  public ABOptions(ABType type, String id, T... ab) {
+    this.type = type;
+    this.id = id;
+    this.ab = ab;
+  }
 
-    public ABType getType() {
-        return type;
-    }
+  public ABType getType() {
+    return type;
+  }
 
-    public String[] getAb() {
-        return ab;
-    }
+  public T[] getAb() {
+    return ab;
+  }
 
-    public enum ABType {
-        CLASS, THEME
-    }
+  public String getId() {
+    return id;
+  }
+
+  public enum ABType {
+    CLASS, THEME, TEXT
+  }
 }
