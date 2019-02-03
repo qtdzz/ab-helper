@@ -2,7 +2,6 @@ package com.qtdzz.abhelper.demo;
 
 import com.qtdzz.abhelper.ABManager;
 import com.qtdzz.abhelper.ABOptions;
-import com.qtdzz.abhelper.ABVariants;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.notification.Notification;
@@ -16,7 +15,6 @@ import com.vaadin.flow.server.PWA;
 @Route("")
 @PWA(name = "Project Base for Vaadin Flow", shortName = "Project Base")
 public class MainView extends VerticalLayout {
-  @ABVariants
   private Button mybutton;
 
   public MainView() {
