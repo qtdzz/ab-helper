@@ -1,6 +1,6 @@
 package com.qtdzz.abhelper.demo;
 
-import com.qtdzz.abhelper.ABManager;
+import com.qtdzz.abhelper.ABController;
 import com.qtdzz.abhelper.ABOptions;
 
 import com.vaadin.flow.component.button.Button;
@@ -26,8 +26,8 @@ public class MainView extends VerticalLayout {
     ABOptions<String> options = new ABOptions<>(ABOptions.ABType.THEME,
         "button", "contrast primary", "contrast", "contrast tertiary",
         "success primary", "success", "success tertiary");
-    ABManager.setABVariant(mybutton, options);
-    ABManager.setABVariant(mybutton,
+    ABController.setABVariant(mybutton, options);
+    ABController.setABVariant(mybutton,
         new ABOptions<String>(ABOptions.ABType.TEXT, "button_text", "Register",
             "Sign Up Now!", "Subscribe now!"));
   }

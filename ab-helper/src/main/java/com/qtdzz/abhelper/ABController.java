@@ -5,7 +5,7 @@ import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.HasText;
 import com.vaadin.flow.component.HasTheme;
 
-public class ABManager {
+public class ABController {
 
   public static <T> void setABVariant(Component component,
       ABOptions<T> options) {
