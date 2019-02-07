@@ -3,7 +3,6 @@ package com.qtdzz.abhelper;
 import com.vaadin.flow.server.VaadinService;
 import com.vaadin.flow.server.VaadinSession;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.Cookie;
 import java.util.Random;
@@ -29,12 +28,12 @@ public class ABStrategy {
     return INSTANCE;
   }
 
-  public <T> T getVariant(ABOptions<T> options) {
+  public Object getVariant(ABExperiment options) {
     int choice = getChoice(options);
     return options.getAb()[choice];
   }
 
-  private <T> int getChoice(ABOptions<T> options) {
+  private <T> int getChoice(ABExperiment options) {
     String id = options.getId();
     String attributeName = COOKIE_AB_CHOICE_PREFIX + id;
 
