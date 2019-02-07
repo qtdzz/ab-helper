@@ -24,6 +24,6 @@ public class ABOptions<T> {
   }
 
   public enum ABType {
-    CLASS, THEME, TEXT
+    CLASS, THEME, TEXT, VALUE
   }
 }
