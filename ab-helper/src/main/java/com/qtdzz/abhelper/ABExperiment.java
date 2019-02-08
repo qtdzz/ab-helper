@@ -31,6 +31,13 @@ public abstract class ABExperiment {
     }
   }
 
+  public void clearListeners() {
+    synchronized (lock) {
+      beforeListeners.clear();
+      afterListeners.clear();
+    }
+  }
+
   public void addAfterListener(ABAfterListener listener) {
     synchronized (lock) {
       afterListeners.add(listener);

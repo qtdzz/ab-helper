@@ -19,6 +19,23 @@ import com.vaadin.flow.server.PWA;
 @Route("")
 @PWA(name = "Project Base for Vaadin Flow", shortName = "Project Base")
 public class MainView extends VerticalLayout {
+  static {
+    ABExperiment experiment = ABManager.getInstance().createExperiment(
+        ABType.THEME, "button", "contrast primary", "contrast",
+        "contrast tertiary", "success primary", "success", "success tertiary");
+    experiment.addBeforeListener(
+        (component, variant) -> LoggerFactory.getLogger(MainView.class)
+            .info("===before: {} - {}", experiment.getId(), variant));
+    experiment.addAfterListener(
+        (component, variant) -> LoggerFactory.getLogger(MainView.class)
+            .info("===After: {} - {}", experiment.getId(), variant));
+    ABExperiment experiment2 = ABManager.getInstance().createExperiment(
+        ABType.TEXT, "button_text", "Register", "Sign Up Now!",
+        "Subscribe now!");
+    ABExperiment experiment3 = ABManager.getInstance().createExperiment(
+        ABType.VALUE, "text_field_value", "", "pre-filled value",
+        "pre-filled value2", "pre-filled value3");
+  }
 
   public MainView() {
     Button button = new Button("Click me",
@@ -27,27 +44,13 @@ public class MainView extends VerticalLayout {
     Button mybutton = new Button("ping ping");
     add(button);
     add(mybutton);
-    ABExperiment experiment = ABManager.getInstance().createExperiment(
-        ABType.THEME, "button", "contrast primary", "contrast",
-        "contrast tertiary", "success primary", "success", "success tertiary");
-    experiment.addBeforeListener(
-        (component, variant) -> LoggerFactory.getLogger(this.getClass())
-            .info("===before: {} - {}", experiment.getId(), variant));
-    experiment.addAfterListener(
-        (component, variant) -> LoggerFactory.getLogger(this.getClass())
-            .info("===After: {} - {}", experiment.getId(), variant));
-    ABController.applyExperiment(mybutton, experiment.getId());
 
-    ABExperiment experiment2 = ABManager.getInstance().createExperiment(
-        ABType.TEXT, "button_text", "Register", "Sign Up Now!",
-        "Subscribe now!");
-    ABController.applyExperiment(mybutton, experiment2.getId());
+    ABController.applyExperiment(mybutton, "button");
 
-    ABExperiment experiment3 = ABManager.getInstance().createExperiment(
-        ABType.VALUE, "text_field_value", "", "pre-filled value",
-        "pre-filled value2", "pre-filled value3");
+    ABController.applyExperiment(mybutton, "button_text");
+
     TextField myTextField = new TextField();
     add(myTextField);
-    ABController.applyExperiment(myTextField, experiment3.getId());
+    ABController.applyExperiment(myTextField, "text_field_value");
   }
 }
