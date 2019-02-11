@@ -1,6 +1,7 @@
 package com.qtdzz.abhelper;
 
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.HasTheme;
 
 public class ABThemeExperiment extends ABExperiment {
@@ -10,12 +11,18 @@ public class ABThemeExperiment extends ABExperiment {
 
   @Override
   protected void internalApply(Component component, Object variant) {
-    ((HasTheme) component).addThemeName((String) variant);
+    if (component instanceof HasTheme) {
+      ((HasTheme) component).addThemeName((String) variant);
+    } else {
+      String theme = component.getElement().getAttribute("theme");
+      theme += variant;
+      component.getElement().setAttribute("theme", theme);
+    }
   }
 
   @Override
   protected void validate(Component component) {
-    if (!(component instanceof HasTheme)) {
+    if (!(component instanceof HasTheme) && !(component instanceof HasStyle)) {
       String message = String.format(
           "Can't set %s variants for non %s components", getType(),
           HasTheme.class.getName());

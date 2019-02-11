@@ -16,6 +16,7 @@
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <vaadin.version>10.0.10</vaadin.version>
     </properties>
     <repositories>
         <!-- Repository used by many Vaadin add-ons -->
@@ -41,4 +42,15 @@
             </releases>
         </repository>
     </repositories>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-bom</artifactId>
+                <type>pom</type>
+                <scope>import</scope>
+                <version>${vaadin.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>

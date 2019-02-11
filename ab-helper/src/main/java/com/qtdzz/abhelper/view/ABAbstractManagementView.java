@@ -4,8 +4,10 @@ import com.qtdzz.abhelper.ABDataSource;
 import com.qtdzz.abhelper.ABExperiment;
 import com.qtdzz.abhelper.ABManager;
 
+import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.data.renderer.ComponentRenderer;
 
 public abstract class ABAbstractManagementView extends VerticalLayout {
   protected final Grid<ABExperiment> experimentGrid;
@@ -23,6 +25,15 @@ public abstract class ABAbstractManagementView extends VerticalLayout {
         .setHeader("Experiment type");
     experimentGrid.addColumn(experiment -> experiment.getAb().length)
         .setHeader("No. of variants");
+    experimentGrid.addColumn(new ComponentRenderer<>(experiment -> {
+      Checkbox isEnableCheckBox = new Checkbox(experiment.isEnable());
+      isEnableCheckBox.addValueChangeListener(event -> {
+        experiment.setEnable(event.getValue());
+        getDataSource().store(experiment);
+      });
+      return isEnableCheckBox;
+    })).setHeader("Is enable");
+
   }
 
   private ABDataSource getDataSource() {

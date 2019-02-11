@@ -12,11 +12,13 @@ public abstract class ABExperiment {
   private final Set<ABBeforeListener> beforeListeners = new HashSet<>();
   private final Set<ABAfterListener> afterListeners = new HashSet<>();
   private final Object lock = new Object();
+  private boolean isEnable;
 
   ABExperiment(ABType type, String id, Object... ab) {
     this.type = type;
     this.id = id;
     this.ab = ab;
+    this.isEnable = true;
   }
 
   public void addBeforeListener(ABBeforeListener listener) {
@@ -87,10 +89,21 @@ public abstract class ABExperiment {
   }
 
   private Object getVariant() {
+    if (!isEnable) {
+      return this.getAb()[0];
+    }
     return ABStrategy.getInstance().getVariant(this);
   }
 
   protected abstract void internalApply(Component component, Object variant);
 
   protected abstract void validate(Component component);
+
+  public boolean isEnable() {
+    return isEnable;
+  }
+
+  public void setEnable(boolean enable) {
+    isEnable = enable;
+  }
 }

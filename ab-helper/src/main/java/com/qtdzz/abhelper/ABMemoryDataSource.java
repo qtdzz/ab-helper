@@ -9,9 +9,7 @@ public class ABMemoryDataSource implements ABDataSource {
   @Override
   public void store(ABExperiment experiment) {
     synchronized (lock) {
-      if (!experiments.containsKey(experiment.getId())) {
-        experiments.put(experiment.getId(), experiment);
-      }
+      experiments.put(experiment.getId(), experiment);
     }
   }
 

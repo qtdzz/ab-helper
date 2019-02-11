@@ -26,7 +26,6 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin</artifactId>
-            <version>10.0.10</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
