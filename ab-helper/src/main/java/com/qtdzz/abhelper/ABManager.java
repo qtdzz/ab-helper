@@ -1,11 +1,8 @@
 package com.qtdzz.abhelper;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class ABManager {
   private static final ABManager INSTANCE = new ABManager();
-  private final Map<String, ABExperiment> experiments = new HashMap<>();
+  private ABDataSource dataSource;
 
   private ABManager() {
     // no op
@@ -15,8 +12,16 @@ public class ABManager {
     return INSTANCE;
   }
 
+  public void setABDataSource(ABDataSource dataSource) {
+    this.dataSource = dataSource;
+  }
+
+  public ABDataSource getDataSource() {
+    return this.dataSource;
+  }
+
   public ABExperiment getExperiment(String experimentId) {
-    return experiments.get(experimentId);
+    return dataSource.get(experimentId);
   }
 
   public ABExperiment createExperiment(ABType type, String id,
@@ -41,7 +46,7 @@ public class ABManager {
     default:
       throw new IllegalStateException("Not found ABType");
     }
-    experiments.put(id, experiment);
+    dataSource.store(experiment);
     return experiment;
   }
 }
