@@ -64,18 +64,18 @@ public abstract class ABExperiment {
     return id;
   }
 
-  private void fireBeforeEvent(Component component, Object variant) {
+  private void fireBeforeEvent(ABEvent abEvent) {
     synchronized (lock) {
       for (ABBeforeListener beforeListener : beforeListeners) {
-        beforeListener.before(component, variant);
+        beforeListener.before(abEvent);
       }
     }
   }
 
-  private void fireAfterEvent(Component component, Object variant) {
+  private void fireAfterEvent(ABEvent abEvent) {
     synchronized (lock) {
       for (ABAfterListener afterListener : afterListeners) {
-        afterListener.after(component, variant);
+        afterListener.after(abEvent);
       }
     }
   }
@@ -83,9 +83,10 @@ public abstract class ABExperiment {
   public void apply(Component component) {
     validate(component);
     Object variant = getVariant();
-    fireBeforeEvent(component, variant);
+    ABEvent abEvent = new ABEvent(component, variant, this.isEnable);
+    fireBeforeEvent(abEvent);
     internalApply(component, variant);
-    fireAfterEvent(component, variant);
+    fireAfterEvent(abEvent);
   }
 
   private Object getVariant() {
