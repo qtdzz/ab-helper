@@ -6,7 +6,7 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.HasTheme;
 
-public class ABThemeExperiment extends ABExperiment {
+public class ABThemeExperiment extends ABComponentExperiment {
   ABThemeExperiment(String id, Object... ab) {
     super(ABType.THEME, id, ab);
   }

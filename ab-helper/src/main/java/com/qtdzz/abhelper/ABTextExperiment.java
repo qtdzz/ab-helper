@@ -3,7 +3,7 @@ package com.qtdzz.abhelper;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasText;
 
-public class ABTextExperiment extends ABExperiment {
+public class ABTextExperiment extends ABComponentExperiment {
   ABTextExperiment(String id, Object... ab) {
     super(ABType.TEXT, id, ab);
   }

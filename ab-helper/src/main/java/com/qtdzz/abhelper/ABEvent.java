@@ -1,20 +1,18 @@
 package com.qtdzz.abhelper;
 
-import com.vaadin.flow.component.Component;
-
 public class ABEvent {
-  private final Component component;
+  private final Object data;
   private final Object selectedVariant;
   private final boolean isEnable;
 
-  ABEvent(Component component, Object selectedVariant, boolean isEnable) {
-    this.component = component;
+  ABEvent(Object data, Object selectedVariant, boolean isEnable) {
+    this.data = data;
     this.selectedVariant = selectedVariant;
     this.isEnable = isEnable;
   }
 
-  public Component getComponent() {
-    return component;
+  public Object getComponent() {
+    return data;
   }
 
   public Object getSelectedVariant() {

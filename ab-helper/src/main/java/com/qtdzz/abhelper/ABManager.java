@@ -25,7 +25,7 @@ public class ABManager {
   }
 
   public ABExperiment createExperiment(ABType type, String id,
-      Object... variants) {
+                                       Object... variants) {
     ABExperiment experiment = getExperiment(id);
     if (experiment != null) {
       return experiment;
@@ -42,6 +42,9 @@ public class ABManager {
       break;
     case VALUE:
       experiment = new ABValueExperiment(id, variants);
+      break;
+    case VIEW:
+      experiment = new ABViewExperiment(id, variants);
       break;
     default:
       throw new IllegalStateException("Not found ABType");

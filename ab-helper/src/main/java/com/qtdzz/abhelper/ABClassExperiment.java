@@ -3,7 +3,7 @@ package com.qtdzz.abhelper;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasStyle;
 
-public class ABClassExperiment extends ABExperiment {
+public class ABClassExperiment extends ABComponentExperiment {
 
   ABClassExperiment(String id, Object[] ab) {
     super(ABType.CLASS, id, ab);

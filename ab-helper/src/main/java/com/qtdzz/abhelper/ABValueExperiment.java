@@ -3,7 +3,7 @@ package com.qtdzz.abhelper;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasValue;
 
-public class ABValueExperiment extends ABExperiment {
+public class ABValueExperiment extends ABComponentExperiment {
 
   ABValueExperiment(String id, Object... ab) {
     super(ABType.VALUE, id, ab);

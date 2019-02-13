@@ -1,12 +1,14 @@
 package com.qtdzz.abhelper;
 
-import com.vaadin.flow.server.VaadinService;
-import com.vaadin.flow.server.VaadinSession;
-import org.apache.commons.lang3.StringUtils;
-
 import javax.servlet.http.Cookie;
+
 import java.util.Random;
 import java.util.UUID;
+
+import org.apache.commons.lang3.StringUtils;
+
+import com.vaadin.flow.server.VaadinService;
+import com.vaadin.flow.server.VaadinSession;
 
 public class ABStrategy {
   private static final ABStrategy INSTANCE = new ABStrategy();
@@ -39,19 +41,18 @@ public class ABStrategy {
 
     String choice = getCookie(attributeName);
     VaadinSession vaadinSession = VaadinSession.getCurrent();
-    if (StringUtils.isNotBlank(choice) && StringUtils.isNumeric(choice) && Integer.valueOf(choice) < options.getAb().length) {
+    if (StringUtils.isNotBlank(choice) && StringUtils.isNumeric(choice)
+        && Integer.valueOf(choice) < options.getAb().length) {
       vaadinSession.setAttribute(attributeName, null);
       return Integer.valueOf(choice);
     }
     vaadinSession.lock();
     Integer newChoice;
     try {
-      newChoice = (Integer) vaadinSession
-              .getAttribute(attributeName);
+      newChoice = (Integer) vaadinSession.getAttribute(attributeName);
       if (newChoice == null) {
         newChoice = random.nextInt(options.getAb().length);
-        vaadinSession.setAttribute(attributeName,
-                newChoice);
+        vaadinSession.setAttribute(attributeName, newChoice);
       }
       setCookie(attributeName, newChoice.toString());
       return newChoice;
