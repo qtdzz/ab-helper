@@ -26,7 +26,7 @@ public class ABInitializer implements VaadinServiceInitListener {
     abManager.createExperiment(ABType.CLASS, "text_color_class", "green-text",
         "red-text");
     ABExperiment view_ab = abManager.createExperiment(ABType.VIEW, "view_AB",
-        MainView.class, BMainView.class);
+        BMainView.class, AMainView.class);
     view_ab.addBeforeListener(abEvent -> LoggerFactory
         .getLogger(this.getClass()).info("==== view before"));
     view_ab.addAfterListener(abEvent -> LoggerFactory.getLogger(this.getClass())
