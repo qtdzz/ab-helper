@@ -21,8 +21,7 @@ public class ABController {
     ABExperiment abViewExperiment = ABManager.getInstance()
         .getExperiment(experimentId);
 
-    if (abViewExperiment == null || !abViewExperiment.isEnable()
-        || !(abViewExperiment instanceof ABViewExperiment)) {
+    if (abViewExperiment == null || !(abViewExperiment instanceof ABViewExperiment)) {
       return;
     }
     ((ABViewExperiment) abViewExperiment).apply(event);

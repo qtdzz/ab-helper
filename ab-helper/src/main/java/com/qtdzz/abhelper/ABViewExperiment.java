@@ -8,8 +8,12 @@ public class ABViewExperiment extends ABExperiment {
     super(ABType.VIEW, id, ab);
   }
 
+  protected ABViewExperiment(ABType type, String id, Object... ab) {
+    super(type, id, ab);
+  }
+
   public void apply(BeforeEvent event) {
-    Object variant = ABStrategy.getInstance().getVariant(this);
+    Object variant = getVariant();
     fireBeforeEvent(new ABEvent(event, variant, isEnable()));
     if (variant instanceof Class
         && Component.class.isAssignableFrom((Class) variant)
@@ -17,6 +21,13 @@ public class ABViewExperiment extends ABExperiment {
       event.rerouteTo((Class<? extends Component>) variant);
     }
     fireAfterEvent(new ABEvent(event, variant, isEnable()));
+  }
+
+  protected Object getVariant() {
+    if (!isEnable()) {
+      return this.getAb()[0];
+    }
+    return ABStrategy.getInstance().getVariant(this);
   }
 
 }

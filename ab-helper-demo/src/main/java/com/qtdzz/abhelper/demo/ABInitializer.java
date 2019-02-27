@@ -32,5 +32,12 @@ public class ABInitializer implements VaadinServiceInitListener {
     view_ab.addAfterListener(abEvent -> LoggerFactory.getLogger(this.getClass())
         .info("==== view after"));
 
+    ABExperiment redirectingViewExperiment = abManager.createExperiment(
+        ABType.REDIRECTING_VIEW, "redirecting_viewAB", BMainView.class,
+        AMainView.class);
+    redirectingViewExperiment.addBeforeListener(abEvent -> LoggerFactory
+        .getLogger(this.getClass()).info("==== Redirecting"));
+    redirectingViewExperiment.addAfterListener(abEvent -> LoggerFactory
+        .getLogger(this.getClass()).info("==== Redirecting Done ==== "));
   }
 }
