@@ -9,15 +9,10 @@ public class ABRedirectingViewExperiment extends ABViewExperiment {
   }
 
   @Override
-  public void apply(BeforeEvent event) {
-    Object variant = getVariant();
-    fireBeforeEvent(new ABEvent(event, variant, isEnable()));
+  protected void internalApply(BeforeEvent event, Object variant) {
     if (variant instanceof Class
-        && Component.class.isAssignableFrom((Class) variant)
-        && event.getNavigationTarget() != variant) {
-
+        && Component.class.isAssignableFrom((Class) variant)) {
       event.forwardTo((Class<? extends Component>) variant);
     }
-    fireAfterEvent(new ABEvent(event, variant, isEnable()));
   }
 }
