@@ -5,6 +5,10 @@ import com.vaadin.flow.router.BeforeEvent;
 
 public class ABController {
 
+  private ABController() {
+    // no op
+  }
+
   public static void applyExperiment(Component component, String experimentId) {
     ABExperiment experiment = ABManager.getInstance()
         .getExperiment(experimentId);
@@ -21,7 +25,7 @@ public class ABController {
     ABExperiment abViewExperiment = ABManager.getInstance()
         .getExperiment(experimentId);
 
-    if (abViewExperiment == null || !(abViewExperiment instanceof ABViewExperiment)) {
+    if (!(abViewExperiment instanceof ABViewExperiment)) {
       return;
     }
     ((ABViewExperiment) abViewExperiment).apply(event);

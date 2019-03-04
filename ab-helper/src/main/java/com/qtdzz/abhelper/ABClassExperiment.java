@@ -10,7 +10,7 @@ public class ABClassExperiment extends ABComponentExperiment {
   }
 
   @Override
-  public void validate(Component component) throws IllegalStateException {
+  public void validate(Component component) {
     if (!(component instanceof HasStyle)) {
       String message = String.format(
           "Can't set %s variants for non %s components", getType(),

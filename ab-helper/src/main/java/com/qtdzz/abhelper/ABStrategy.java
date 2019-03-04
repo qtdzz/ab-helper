@@ -12,14 +12,11 @@ import com.vaadin.flow.server.VaadinSession;
 
 public class ABStrategy {
   private static final ABStrategy INSTANCE = new ABStrategy();
-  private static final String AB_VARIANT_SESSION_ATTRIBUTE = "AB_VARIANT_CHOICE";
-  private static final String AB_USER_ID = "AB_CURRENT_USER_ID";
 
   private static final String COOKIE_AB_USERID = "_abhelper_user_id";
   private static final String COOKIE_AB_CHOICE_PREFIX = "_abhelper_choice_";
 
   private static final int MAXAGE = 2 * 7 * 24 * 2600;
-  private final Object lock = new Object();
   private final Random random = new Random();
 
   private ABStrategy() {
@@ -35,7 +32,7 @@ public class ABStrategy {
     return options.getAb()[choice];
   }
 
-  private <T> int getChoice(ABExperiment options) {
+  private int getChoice(ABExperiment options) {
     String id = options.getId();
     String attributeName = COOKIE_AB_CHOICE_PREFIX + id;
 
@@ -62,7 +59,8 @@ public class ABStrategy {
     }
   }
 
-  private String getUserId() {
+  @SuppressWarnings("squid:UnusedPrivateMethod")
+  public String getUserId() {
     String userId = getCookie(COOKIE_AB_USERID);
     VaadinSession vaadinSession = VaadinSession.getCurrent();
     if (StringUtils.isNotBlank(userId)) {

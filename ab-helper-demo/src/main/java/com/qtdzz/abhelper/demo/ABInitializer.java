@@ -25,11 +25,11 @@ public class ABInitializer implements VaadinServiceInitListener {
         "pre-filled value", "pre-filled value2", "pre-filled value3");
     abManager.createExperiment(ABType.CLASS, "text_color_class", "green-text",
         "red-text");
-    ABExperiment view_ab = abManager.createExperiment(ABType.VIEW, "view_AB",
+    ABExperiment viewAB = abManager.createExperiment(ABType.VIEW, "view_AB",
         BMainView.class, AMainView.class);
-    view_ab.addBeforeListener(abEvent -> LoggerFactory
+    viewAB.addBeforeListener(abEvent -> LoggerFactory
         .getLogger(this.getClass()).info("==== view before"));
-    view_ab.addAfterListener(abEvent -> LoggerFactory.getLogger(this.getClass())
+    viewAB.addAfterListener(abEvent -> LoggerFactory.getLogger(this.getClass())
         .info("==== view after"));
 
     ABExperiment redirectingViewExperiment = abManager.createExperiment(
