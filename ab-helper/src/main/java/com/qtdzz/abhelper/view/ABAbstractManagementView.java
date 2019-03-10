@@ -23,7 +23,7 @@ public abstract class ABAbstractManagementView extends VerticalLayout {
     experimentGrid.addColumn(ABExperiment::getId).setHeader("Experiment id");
     experimentGrid.addColumn(ABExperiment::getType)
         .setHeader("Experiment type");
-    experimentGrid.addColumn(experiment -> experiment.getAb().length)
+    experimentGrid.addColumn(experiment -> experiment.getVariants().length)
         .setHeader("No. of variants");
     experimentGrid.addColumn(new ComponentRenderer<>(experiment -> {
       Checkbox isEnableCheckBox = new Checkbox(experiment.isEnable());

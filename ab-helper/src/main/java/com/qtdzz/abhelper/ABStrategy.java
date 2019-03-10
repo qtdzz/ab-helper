@@ -29,7 +29,7 @@ public class ABStrategy {
 
   public Object getVariant(ABExperiment options) {
     int choice = getChoice(options);
-    return options.getAb()[choice];
+    return options.getVariants()[choice];
   }
 
   private int getChoice(ABExperiment options) {
@@ -39,7 +39,7 @@ public class ABStrategy {
     String choice = getCookie(attributeName);
     VaadinSession vaadinSession = VaadinSession.getCurrent();
     if (StringUtils.isNotBlank(choice) && StringUtils.isNumeric(choice)
-        && Integer.valueOf(choice) < options.getAb().length) {
+        && Integer.valueOf(choice) < options.getVariants().length) {
       vaadinSession.setAttribute(attributeName, null);
       return Integer.valueOf(choice);
     }
@@ -48,7 +48,7 @@ public class ABStrategy {
     try {
       newChoice = (Integer) vaadinSession.getAttribute(attributeName);
       if (newChoice == null) {
-        newChoice = random.nextInt(options.getAb().length);
+        newChoice = random.nextInt(options.getVariants().length);
         vaadinSession.setAttribute(attributeName, newChoice);
       }
       setCookie(attributeName, newChoice.toString());

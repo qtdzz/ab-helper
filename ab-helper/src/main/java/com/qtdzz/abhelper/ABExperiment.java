@@ -3,19 +3,19 @@ package com.qtdzz.abhelper;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ABExperiment {
+public abstract class ABExperiment {
   private final ABType type;
-  private final Object[] ab;
+  private final Object[] variants;
   private final String id;
   private final Set<ABBeforeListener> beforeListeners = new HashSet<>();
   private final Set<ABAfterListener> afterListeners = new HashSet<>();
   private final Object lock = new Object();
   private boolean isEnable;
 
-  ABExperiment(ABType type, String id, Object... ab) {
+  ABExperiment(ABType type, String id, Object... variants) {
     this.type = type;
     this.id = id;
-    this.ab = ab;
+    this.variants = variants;
     this.isEnable = true;
   }
 
@@ -23,8 +23,8 @@ public class ABExperiment {
     return type;
   }
 
-  public Object[] getAb() {
-    return ab;
+  public Object[] getVariants() {
+    return variants;
   }
 
   public String getId() {

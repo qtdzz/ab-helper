@@ -4,7 +4,7 @@ import com.vaadin.flow.component.Component;
 
 public abstract class ABComponentExperiment extends ABExperiment {
 
-  ABComponentExperiment(ABType type, String id, Object... ab) {
+  protected ABComponentExperiment(ABType type, String id, Object... ab) {
     super(type, id, ab);
   }
 
@@ -17,9 +17,9 @@ public abstract class ABComponentExperiment extends ABExperiment {
     fireAfterEvent(abEvent);
   }
 
-  private Object getVariant() {
+  protected Object getVariant() {
     if (!isEnable()) {
-      return this.getAb()[0];
+      return this.getVariants()[0];
     }
     return ABStrategy.getInstance().getVariant(this);
   }

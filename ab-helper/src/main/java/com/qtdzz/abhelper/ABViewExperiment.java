@@ -39,7 +39,7 @@ public class ABViewExperiment extends ABExperiment {
 
   protected Object getVariant() {
     if (!isEnable()) {
-      return this.getAb()[0];
+      return this.getVariants()[0];
     }
     return ABStrategy.getInstance().getVariant(this);
   }
