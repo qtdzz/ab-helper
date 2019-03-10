@@ -16,22 +16,12 @@ public class ABThemeExperiment extends ABComponentExperiment {
     if (variant == null || StringUtils.isBlank(variant.toString())) {
       return;
     }
-    if (component instanceof HasTheme) {
-      ((HasTheme) component).addThemeName((String) variant);
-    } else {
-      String theme = component.getElement().getAttribute("theme");
-      if (StringUtils.isBlank(theme)) {
-        theme = variant.toString();
-      } else {
-        theme += " " + variant;
-      }
-      component.getElement().setAttribute("theme", theme);
-    }
+    ((HasTheme) component).addThemeName((String) variant);
   }
 
   @Override
   protected void validate(Component component) {
-    if (!(component instanceof HasTheme) && !(component instanceof HasStyle)) {
+    if (!(component instanceof HasTheme)) {
       String message = String.format(
           "Can't set %s variants for non %s components", getType(),
           HasTheme.class.getName());
