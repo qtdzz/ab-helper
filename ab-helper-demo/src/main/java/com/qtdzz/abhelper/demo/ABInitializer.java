@@ -9,8 +9,10 @@ import com.vaadin.flow.server.VaadinServiceInitListener;
 public class ABInitializer implements VaadinServiceInitListener {
   @Override
   public void serviceInit(ServiceInitEvent event) {
-    ABManager abManager = ABManager.getInstance();
-    abManager.setABDataSource(new ABMemoryDataSource());
+    ABMemoryDataSource dataSource = new ABMemoryDataSource();
+    ABManager abManager = ABManager
+        .initializeABManager(dataSource);
+
     ABComponentExperiment experiment = (ABComponentExperiment) abManager
         .createExperiment(ABType.THEME, "button", "contrast primary",
             "contrast", "contrast tertiary", "success primary", "success",
@@ -27,8 +29,8 @@ public class ABInitializer implements VaadinServiceInitListener {
         "red-text");
     ABExperiment viewAB = abManager.createExperiment(ABType.VIEW, "view_AB",
         BMainView.class, AMainView.class);
-    viewAB.addBeforeListener(abEvent -> LoggerFactory
-        .getLogger(this.getClass()).info("==== view before"));
+    viewAB.addBeforeListener(abEvent -> LoggerFactory.getLogger(this.getClass())
+        .info("==== view before"));
     viewAB.addAfterListener(abEvent -> LoggerFactory.getLogger(this.getClass())
         .info("==== view after"));
 

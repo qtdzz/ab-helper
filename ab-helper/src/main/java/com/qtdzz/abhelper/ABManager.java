@@ -1,19 +1,32 @@
 package com.qtdzz.abhelper;
 
-public class ABManager {
-  private static final ABManager INSTANCE = new ABManager();
-  private ABDataSource dataSource;
+import java.util.Objects;
 
-  private ABManager() {
-    // no op
+import org.slf4j.LoggerFactory;
+
+public class ABManager {
+  private static ABManager instance;
+  private final ABDataSource dataSource;
+
+  private ABManager(ABDataSource dataSource) {
+    this.dataSource = dataSource;
   }
 
   public static ABManager getInstance() {
-    return INSTANCE;
+    Objects.requireNonNull(instance,
+        "ABManager hasn't been initialized. Please use ABManage#initializeABManager "
+            + "to initialize the manager before using it.");
+    return instance;
   }
 
-  public void setABDataSource(ABDataSource dataSource) {
-    this.dataSource = dataSource;
+  public static ABManager initializeABManager(ABDataSource dataSource) {
+    if (instance == null) {
+      instance = new ABManager(dataSource);
+    } else {
+      LoggerFactory.getLogger(ABManager.class).warn(
+          "The ABManager has been initialized already. Use ABManager#getInstance to get access to the manager.");
+    }
+    return instance;
   }
 
   public ABDataSource getDataSource() {
@@ -22,6 +35,15 @@ public class ABManager {
 
   public ABExperiment getExperiment(String experimentId) {
     return dataSource.get(experimentId);
+  }
+
+  public ABExperiment createExperiment(ABExperiment experiment) {
+    ABExperiment storedExperiment = getExperiment(experiment.getId());
+    if (storedExperiment != null) {
+      return storedExperiment;
+    }
+    dataSource.store(experiment);
+    return experiment;
   }
 
   public ABExperiment createExperiment(ABType type, String id,

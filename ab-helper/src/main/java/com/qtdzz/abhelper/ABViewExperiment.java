@@ -22,18 +22,22 @@ public class ABViewExperiment extends ABExperiment {
 
   public void apply(BeforeEvent event) {
     Object variant = getVariant();
-    verifyBeforeApply(event, variant);
+    validate(event, variant);
     fireBeforeEvent(new ABEvent(event, variant, isEnable()));
     internalApply(event, variant);
     fireAfterEvent(new ABEvent(event, variant, isEnable()));
   }
 
-  protected void verifyBeforeApply(BeforeEvent event, Object variant) {
+  protected void validate(BeforeEvent event, Object variant) {
     if (event.getNavigationTarget().equals(variant)) {
       String message = String.format(
           "The current view '%s' can't be an option in view variants.",
           event.getNavigationTarget());
       throw new IllegalStateException(message);
+    }
+    if (!(variant instanceof Class)
+            || !Component.class.isAssignableFrom((Class) variant)) {
+      throw new IllegalStateException("Variant is invalid");
     }
   }
 
@@ -45,10 +49,6 @@ public class ABViewExperiment extends ABExperiment {
   }
 
   protected void internalApply(BeforeEvent event, Object variant) {
-    if (!(variant instanceof Class)
-        || !Component.class.isAssignableFrom((Class) variant)) {
-      throw new IllegalStateException("Variant is invalid");
-    }
     Optional<String> currentBaseUrl = event.getSource().getRegistry()
         .getTargetUrl((Class<? extends Component>) event.getNavigationTarget());
     Optional<String> nextTargetUrl = event.getSource().getRegistry()
