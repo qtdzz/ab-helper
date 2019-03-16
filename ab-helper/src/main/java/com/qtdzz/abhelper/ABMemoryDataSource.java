@@ -7,6 +7,13 @@ public class ABMemoryDataSource implements ABDataSource {
   private final Object lock = new Object();
 
   @Override
+  public void delete(String id) {
+    synchronized (lock) {
+      experiments.remove(id);
+    }
+  }
+
+  @Override
   public void store(ABExperiment experiment) {
     synchronized (lock) {
       experiments.put(experiment.getId(), experiment);
