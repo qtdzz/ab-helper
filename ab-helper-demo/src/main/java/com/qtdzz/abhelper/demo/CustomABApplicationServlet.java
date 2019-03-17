@@ -1,26 +1,30 @@
 package com.qtdzz.abhelper.demo;
 
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+
 import com.qtdzz.abhelper.*;
 import org.slf4j.LoggerFactory;
 
-import com.vaadin.flow.server.ServiceInitEvent;
-import com.vaadin.flow.server.VaadinServiceInitListener;
+import com.vaadin.flow.server.VaadinServlet;
 
-public class ABInitializer implements VaadinServiceInitListener {
+@WebServlet(value = "/*", asyncSupported = true)
+public class CustomABApplicationServlet extends VaadinServlet {
   @Override
-  public void serviceInit(ServiceInitEvent event) {
+  protected void servletInitialized() throws ServletException {
+    super.servletInitialized();
     ABMemoryDataSource dataSource = new ABMemoryDataSource();
-    ABManager abManager = ABManager
-        .initializeABManager(dataSource);
+    ABManager abManager = ABManager.initializeABManager(dataSource);
+    ABStrategy.initialize();
 
     ABComponentExperiment experiment = (ABComponentExperiment) abManager
         .createExperiment(ABType.THEME, "button", "contrast primary",
             "contrast", "contrast tertiary", "success primary", "success",
             "success tertiary");
     experiment.addBeforeListener(abEvent -> LoggerFactory
-        .getLogger(ABInitializer.class).info("=== before"));
+        .getLogger(CustomABApplicationServlet.class).info("=== before"));
     experiment.addAfterListener(abEvent -> LoggerFactory
-        .getLogger(ABInitializer.class).info("=== after"));
+        .getLogger(CustomABApplicationServlet.class).info("=== after"));
     abManager.createExperiment(ABType.TEXT, "button_text", "Register",
         "Sign Up Now!", "Subscribe now!");
     abManager.createExperiment(ABType.VALUE, "text_field_value", "",
