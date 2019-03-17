@@ -72,6 +72,9 @@ public abstract class ABExperiment {
 
   protected void fireBeforeEvent(ABEvent abEvent) {
     synchronized (lock) {
+      if (!abEvent.isEnable()) {
+        return;
+      }
       for (ABBeforeListener beforeListener : beforeListeners) {
         beforeListener.before(abEvent);
       }
@@ -80,6 +83,9 @@ public abstract class ABExperiment {
 
   protected void fireAfterEvent(ABEvent abEvent) {
     synchronized (lock) {
+      if (!abEvent.isEnable()) {
+        return;
+      }
       for (ABAfterListener afterListener : afterListeners) {
         afterListener.after(abEvent);
       }
