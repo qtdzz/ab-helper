@@ -16,7 +16,7 @@ public class ABStrategy {
   private static final String COOKIE_AB_CHOICE_PREFIX = "_abhelper_choice_";
 
   private static final int DEFAULT_MAX_AGE = 4 * 7 * 24 * 3600;
-  private static ABStrategy instance;;
+  private static ABStrategy instance;
   private final int cookieMaxAge;
   private final ABRandomizer randomizer;
 
@@ -105,12 +105,14 @@ public class ABStrategy {
   private void setCookie(String cookieName, String cookieValue) {
     Cookie cookie = new Cookie(cookieName, cookieValue);
     cookie.setMaxAge(cookieMaxAge);
+    cookie.setPath("/");
     VaadinService.getCurrentResponse().addCookie(cookie);
   }
 
   private String getCookie(String cookieName) {
     Cookie[] cookies = VaadinService.getCurrentRequest().getCookies();
     if (cookies == null) {
+      LoggerFactory.getLogger(ABStrategy.class).warn("Cookie is null==========");
       return null;
     }
     for (Cookie cookie : cookies) {

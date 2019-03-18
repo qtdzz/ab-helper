@@ -10,8 +10,7 @@ public class ABController {
   }
 
   public static void applyExperiment(Component component, String experimentId) {
-    ABExperiment experiment = ABManager.getInstance()
-        .getExperiment(experimentId);
+    ABExperiment experiment = ABManager.getExperiment(experimentId);
     if (experiment instanceof ABComponentExperiment) {
       ((ABComponentExperiment) experiment).apply(component);
     } else {
@@ -22,8 +21,7 @@ public class ABController {
 
   public static void applyViewExperiment(BeforeEvent event,
       String experimentId) {
-    ABExperiment abViewExperiment = ABManager.getInstance()
-        .getExperiment(experimentId);
+    ABExperiment abViewExperiment = ABManager.getExperiment(experimentId);
 
     if (!(abViewExperiment instanceof ABViewExperiment)) {
       return;

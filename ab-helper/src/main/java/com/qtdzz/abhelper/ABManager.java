@@ -29,24 +29,24 @@ public class ABManager {
     return instance;
   }
 
-  public ABDataSource getDataSource() {
-    return this.dataSource;
+  public static ABDataSource getDataSource() {
+    return getInstance().dataSource;
   }
 
-  public ABExperiment getExperiment(String experimentId) {
-    return dataSource.get(experimentId);
+  public static ABExperiment getExperiment(String experimentId) {
+    return  getDataSource().get(experimentId);
   }
 
-  public ABExperiment createExperiment(ABExperiment experiment) {
+  public static ABExperiment createExperiment(ABExperiment experiment) {
     ABExperiment storedExperiment = getExperiment(experiment.getId());
     if (storedExperiment != null) {
       return storedExperiment;
     }
-    dataSource.store(experiment);
+    getDataSource().store(experiment);
     return experiment;
   }
 
-  public ABExperiment createExperiment(ABType type, String id,
+  public static ABExperiment createExperiment(ABType type, String id,
       Object... variants) {
     ABExperiment experiment = getExperiment(id);
     if (experiment != null) {
@@ -74,7 +74,7 @@ public class ABManager {
     default:
       throw new IllegalStateException("Not found ABType");
     }
-    dataSource.store(experiment);
+    getDataSource().store(experiment);
     return experiment;
   }
 }

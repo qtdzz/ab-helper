@@ -14,10 +14,10 @@ public class CustomABApplicationServlet extends VaadinServlet {
   protected void servletInitialized() throws ServletException {
     super.servletInitialized();
     ABMemoryDataSource dataSource = new ABMemoryDataSource();
-    ABManager abManager = ABManager.initializeABManager(dataSource);
+    ABManager.initializeABManager(dataSource);
     ABStrategy.initialize();
 
-    ABComponentExperiment experiment = (ABComponentExperiment) abManager
+    ABComponentExperiment experiment = (ABComponentExperiment) ABManager
         .createExperiment(ABType.THEME, "button", "contrast primary",
             "contrast", "contrast tertiary", "success primary", "success",
             "success tertiary");
@@ -25,20 +25,20 @@ public class CustomABApplicationServlet extends VaadinServlet {
         .getLogger(CustomABApplicationServlet.class).info("=== before"));
     experiment.addAfterListener(abEvent -> LoggerFactory
         .getLogger(CustomABApplicationServlet.class).info("=== after"));
-    abManager.createExperiment(ABType.TEXT, "button_text", "Register",
+    ABManager.createExperiment(ABType.TEXT, "button_text", "Register",
         "Sign Up Now!", "Subscribe now!");
-    abManager.createExperiment(ABType.VALUE, "text_field_value", "",
+    ABManager.createExperiment(ABType.VALUE, "text_field_value", "",
         "pre-filled value", "pre-filled value2", "pre-filled value3");
-    abManager.createExperiment(ABType.CLASS, "text_color_class", "green-text",
+    ABManager.createExperiment(ABType.CLASS, "text_color_class", "green-text",
         "red-text");
-    ABExperiment viewAB = abManager.createExperiment(ABType.VIEW, "view_AB",
+    ABExperiment viewAB = ABManager.createExperiment(ABType.VIEW, "view_AB",
         BMainView.class, AMainView.class);
     viewAB.addBeforeListener(abEvent -> LoggerFactory.getLogger(this.getClass())
         .info("==== view before"));
     viewAB.addAfterListener(abEvent -> LoggerFactory.getLogger(this.getClass())
         .info("==== view after"));
 
-    ABExperiment redirectingViewExperiment = abManager.createExperiment(
+    ABExperiment redirectingViewExperiment = ABManager.createExperiment(
         ABType.REDIRECTING_VIEW, "redirecting_viewAB", BMainView.class,
         AMainView.class);
     redirectingViewExperiment.addBeforeListener(abEvent -> LoggerFactory
