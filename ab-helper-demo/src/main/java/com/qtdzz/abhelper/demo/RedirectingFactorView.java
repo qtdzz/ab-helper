@@ -10,17 +10,17 @@ import com.vaadin.flow.router.OptionalParameter;
 import com.vaadin.flow.router.Route;
 
 @Route("re")
-public class RedirectingExperimentView extends VerticalLayout
+public class RedirectingFactorView extends VerticalLayout
     implements HasUrlParameter<String>, ABView {
   @Override
-  public String getViewExperimentId() {
+  public String getViewFactorId() {
     return "redirecting_viewAB";
   }
 
   @Override
   public void setParameter(BeforeEvent event,
       @OptionalParameter String parameter) {
-    LoggerFactory.getLogger(RedirectingExperimentView.class).info("parent",
+    LoggerFactory.getLogger(RedirectingFactorView.class).info("parent",
         parameter);
   }
 }

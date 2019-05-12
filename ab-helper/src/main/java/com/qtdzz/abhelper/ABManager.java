@@ -33,48 +33,48 @@ public class ABManager {
     return getInstance().dataSource;
   }
 
-  public static ABExperiment getExperiment(String experimentId) {
-    return  getDataSource().get(experimentId);
+  public static ABFactor getFactor(String factorId) {
+    return  getDataSource().get(factorId);
   }
 
-  public static ABExperiment createExperiment(ABExperiment experiment) {
-    ABExperiment storedExperiment = getExperiment(experiment.getId());
-    if (storedExperiment != null) {
-      return storedExperiment;
+  public static ABFactor createFactor(ABFactor factor) {
+    ABFactor storedFactor = getFactor(factor.getId());
+    if (storedFactor != null) {
+      return storedFactor;
     }
-    getDataSource().store(experiment);
-    return experiment;
+    getDataSource().store(factor);
+    return factor;
   }
 
-  public static ABExperiment createExperiment(ABType type, String id,
-      Object... variants) {
-    ABExperiment experiment = getExperiment(id);
-    if (experiment != null) {
-      return experiment;
+  public static ABFactor createFactor(ABType type, String id,
+                                      Object... variants) {
+    ABFactor factor = getFactor(id);
+    if (factor != null) {
+      return factor;
     }
     switch (type) {
     case CLASS:
-      experiment = new ABClassExperiment(id, variants);
+      factor = new ABClassFactor(id, variants);
       break;
     case TEXT:
-      experiment = new ABTextExperiment(id, variants);
+      factor = new ABTextFactor(id, variants);
       break;
     case THEME:
-      experiment = new ABThemeExperiment(id, variants);
+      factor = new ABThemeFactor(id, variants);
       break;
     case VALUE:
-      experiment = new ABValueExperiment(id, variants);
+      factor = new ABValueFactor(id, variants);
       break;
     case VIEW:
-      experiment = new ABViewExperiment(id, variants);
+      factor = new ABViewFactor(id, variants);
       break;
     case REDIRECTING_VIEW:
-      experiment = new ABRedirectingViewExperiment(id, variants);
+      factor = new ABRedirectingViewFactor(id, variants);
       break;
     default:
       throw new IllegalStateException("Not found ABType");
     }
-    getDataSource().store(experiment);
-    return experiment;
+    getDataSource().store(factor);
+    return factor;
   }
 }

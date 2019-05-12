@@ -3,37 +3,37 @@ package com.qtdzz.abhelper;
 import java.util.*;
 
 public class ABMemoryDataSource implements ABDataSource {
-  private final Map<String, ABExperiment> experiments = new HashMap<>();
+  private final Map<String, ABFactor> factors = new HashMap<>();
   private final Object lock = new Object();
 
   @Override
   public void delete(String id) {
     synchronized (lock) {
-      experiments.remove(id);
+      factors.remove(id);
     }
   }
 
   @Override
-  public void store(ABExperiment experiment) {
+  public void store(ABFactor factor) {
     synchronized (lock) {
-      experiments.put(experiment.getId(), experiment);
+      factors.put(factor.getId(), factor);
     }
   }
 
   @Override
-  public ABExperiment get(String id) {
+  public ABFactor get(String id) {
     synchronized (lock) {
-      return experiments.get(id);
+      return factors.get(id);
     }
   }
 
   @Override
-  public Collection<ABExperiment> getAllExperiments() {
-    Set<ABExperiment> abExperiments = new HashSet<>();
-    for (Map.Entry<String, ABExperiment> stringABExperimentEntry : experiments
+  public Collection<ABFactor> getAllFactors() {
+    Set<ABFactor> abFactors = new HashSet<>();
+    for (Map.Entry<String, ABFactor> stringABFactorEntry : factors
         .entrySet()) {
-      abExperiments.add(stringABExperimentEntry.getValue());
+      abFactors.add(stringABFactorEntry.getValue());
     }
-    return abExperiments;
+    return abFactors;
   }
 }

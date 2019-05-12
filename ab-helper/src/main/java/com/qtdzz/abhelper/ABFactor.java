@@ -3,7 +3,7 @@ package com.qtdzz.abhelper;
 import java.util.HashSet;
 import java.util.Set;
 
-public abstract class ABExperiment {
+public abstract class ABFactor {
   private final ABType type;
   private final Object[] variants;
   private final String id;
@@ -12,7 +12,7 @@ public abstract class ABExperiment {
   private final Object lock = new Object();
   private boolean isEnable;
 
-  ABExperiment(ABType type, String id, Object... variants) {
+  ABFactor(ABType type, String id, Object... variants) {
     this.type = type;
     this.id = id;
     this.variants = variants;

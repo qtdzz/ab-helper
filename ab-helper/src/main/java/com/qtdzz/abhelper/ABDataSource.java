@@ -5,9 +5,9 @@ import java.util.Collection;
 public interface ABDataSource {
   void delete(String id);
 
-  void store(ABExperiment experiment);
+  void store(ABFactor factor);
 
-  ABExperiment get(String id);
+  ABFactor get(String id);
 
-  Collection<ABExperiment> getAllExperiments();
+  Collection<ABFactor> getAllFactors();
 }

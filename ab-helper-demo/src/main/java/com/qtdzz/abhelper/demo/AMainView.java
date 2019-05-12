@@ -27,13 +27,13 @@ public class AMainView extends VerticalLayout
     add(mybutton);
     Label demoText = new Label("Demo label");
     add(demoText);
-    ABController.applyExperiment(mybutton, "button");
+    ABController.applyFactor(mybutton, "button");
 
-    ABController.applyExperiment(mybutton, "button_text");
-    ABController.applyExperiment(demoText, "text_color_class");
+    ABController.applyFactor(mybutton, "button_text");
+    ABController.applyFactor(demoText, "text_color_class");
     TextField myTextField = new TextField();
     add(myTextField);
-    ABController.applyExperiment(myTextField, "text_field_value");
+    ABController.applyFactor(myTextField, "text_field_value");
   }
 
   @Override

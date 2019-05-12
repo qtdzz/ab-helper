@@ -9,23 +9,22 @@ public class ABController {
     // no op
   }
 
-  public static void applyExperiment(Component component, String experimentId) {
-    ABExperiment experiment = ABManager.getExperiment(experimentId);
-    if (experiment instanceof ABComponentExperiment) {
-      ((ABComponentExperiment) experiment).apply(component);
+  public static void applyFactor(Component component, String factorId) {
+    ABFactor factor = ABManager.getFactor(factorId);
+    if (factor instanceof ABComponentFactor) {
+      ((ABComponentFactor) factor).apply(component);
     } else {
       throw new IllegalStateException(
-          String.format("Can't found experiment with id '%s'", experimentId));
+          String.format("Can't found factor with id '%s'", factorId));
     }
   }
 
-  public static void applyViewExperiment(BeforeEvent event,
-      String experimentId) {
-    ABExperiment abViewExperiment = ABManager.getExperiment(experimentId);
+  public static void applyViewFactor(BeforeEvent event, String factorId) {
+    ABFactor abViewFactor = ABManager.getFactor(factorId);
 
-    if (!(abViewExperiment instanceof ABViewExperiment)) {
+    if (!(abViewFactor instanceof ABViewFactor)) {
       return;
     }
-    ((ABViewExperiment) abViewExperiment).apply(event);
+    ((ABViewFactor) abViewFactor).apply(event);
   }
 }

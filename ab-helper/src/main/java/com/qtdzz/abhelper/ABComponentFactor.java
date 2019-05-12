@@ -2,9 +2,9 @@ package com.qtdzz.abhelper;
 
 import com.vaadin.flow.component.Component;
 
-public abstract class ABComponentExperiment extends ABExperiment {
+public abstract class ABComponentFactor extends ABFactor {
 
-  protected ABComponentExperiment(ABType type, String id, Object... ab) {
+  protected ABComponentFactor(ABType type, String id, Object... ab) {
     super(type, id, ab);
   }
 

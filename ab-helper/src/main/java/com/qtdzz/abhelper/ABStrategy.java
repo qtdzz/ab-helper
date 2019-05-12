@@ -47,12 +47,12 @@ public class ABStrategy {
     return instance;
   }
 
-  public Object getVariant(ABExperiment options) {
+  public Object getVariant(ABFactor options) {
     int choice = getChoice(options);
     return options.getVariants()[choice];
   }
 
-  private int getChoice(ABExperiment options) {
+  private int getChoice(ABFactor options) {
     String id = options.getId();
     String attributeName = COOKIE_AB_CHOICE_PREFIX + id;
 

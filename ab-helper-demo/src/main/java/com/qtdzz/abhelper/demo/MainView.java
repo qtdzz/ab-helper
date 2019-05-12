@@ -8,7 +8,7 @@ import com.vaadin.flow.router.Route;
 @Route("")
 public class MainView extends VerticalLayout implements ABView {
   @Override
-  public String getViewExperimentId() {
+  public String getViewFactorId() {
     return "view_AB";
   }
 }

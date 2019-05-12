@@ -11,12 +11,12 @@ import org.apache.commons.lang3.StringUtils;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.router.BeforeEvent;
 
-public class ABViewExperiment extends ABExperiment {
-  ABViewExperiment(String id, Object... ab) {
+public class ABViewFactor extends ABFactor {
+  ABViewFactor(String id, Object... ab) {
     super(ABType.VIEW, id, ab);
   }
 
-  protected ABViewExperiment(ABType type, String id, Object... ab) {
+  protected ABViewFactor(ABType type, String id, Object... ab) {
     super(type, id, ab);
   }
 

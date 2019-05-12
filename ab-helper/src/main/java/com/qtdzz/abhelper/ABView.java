@@ -7,8 +7,8 @@ public interface ABView extends BeforeEnterObserver {
 
   @Override
   default void beforeEnter(BeforeEnterEvent event) {
-    ABController.applyViewExperiment(event, getViewExperimentId());
+    ABController.applyViewFactor(event, getViewFactorId());
   }
 
-  String getViewExperimentId();
+  String getViewFactorId();
 }

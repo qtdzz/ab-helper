@@ -1,25 +1,24 @@
 package com.qtdzz.abhelper;
 
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.HasValue;
+import com.vaadin.flow.component.HasText;
 
-public class ABValueExperiment extends ABComponentExperiment {
-
-  ABValueExperiment(String id, Object... ab) {
-    super(ABType.VALUE, id, ab);
+public class ABTextFactor extends ABComponentFactor {
+  ABTextFactor(String id, Object... ab) {
+    super(ABType.TEXT, id, ab);
   }
 
   @Override
   protected void internalApply(Component component, Object variant) {
-    ((HasValue) component).setValue(variant);
+    ((HasText) component).setText((String) variant);
   }
 
   @Override
   protected void validate(Component component) {
-    if (!(component instanceof HasValue)) {
+    if (!(component instanceof HasText)) {
       String message = String.format(
           "Can't set %s variants for non %s components", getType(),
-          HasValue.class.getName());
+          HasText.class.getName());
       throw new IllegalStateException(message);
     }
   }
